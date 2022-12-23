@@ -9,25 +9,27 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/cliente")
+@RequestMapping("cliente")
 public class ClienteControl {
 @Autowired
 private SerCliente clienteService;
 
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<?> crearCliente(@RequestBody ClienteDTO clienteDto) {
-
+    public ResponseEntity<?> crearCliente(@RequestBody Cliente cliente) {
+        System.out.println(cliente);
         Cliente clienteAGuardar = new Cliente(
-                clienteDto.getNombre(),
-                clienteDto.getApellido(),
-                clienteDto.getAños()
+                cliente.getNombre(),
+                cliente.getDni(),
+                cliente.getApellido(),
+                cliente.getFechanacimiento()
         );
+        System.out.println(clienteAGuardar);
         return  ResponseEntity.ok( clienteService.creaCliente(clienteAGuardar));
     };
 
 
-    @GetMapping(value = "leer/{id}")
-    public ResponseEntity<?> obtenerClientePorID(@PathVariable(name = "id") final Long id) {
-        return ResponseEntity.ok(clienteService.obtenerClientePorID(id));
-    }
+//    @GetMapping(value = "leer/{id}")
+//    public ResponseEntity<?> obtenerClientePorID(@PathVariable(name = "id") final Long id) {
+//        return ResponseEntity.ok(clienteService.obtenerClientePorID(id));
+//    }
 }

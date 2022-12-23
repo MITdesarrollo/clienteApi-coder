@@ -1,13 +1,14 @@
 package com.clienteApi.clienteApi.entitys;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
+
 
 import java.util.Date;
 import java.util.Objects;
-
+@Entity
+@Table(name = "CLIENTE")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,15 +26,11 @@ public class Cliente {
     @Column(name = "FECHANACIMIENTO")
     private Date fechanacimiento;
 
-    public Cliente(String nombre, String apellido, int años) {
+    public Cliente() {
     }
 
-    public Cliente(long id, String nombre, long dni, String apellido, Date fechanacimiento) {
-        this.id = id;
-        this.nombre = nombre;
-        this.dni = dni;
-        this.apellido = apellido;
-        this.fechanacimiento = fechanacimiento;
+    public Cliente(String nombre, long dni, String apellido, Date fechanacimiento) {
+
     }
 
     public long getId() {
