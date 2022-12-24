@@ -6,36 +6,37 @@ import com.clienteApi.clienteApi.repository.ClienteRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.Date;
+
 @Service
 public class SerCliente {
     @Autowired
     private ClienteRepo clienteRepo;
 
-   public Cliente creaCliente(Cliente cliente){
+    public Cliente creaCliente(Cliente cliente) {
         return clienteRepo.save(cliente);
     }
 
-//    public Cliente obtenerClientePorID(Long id){
-//
-//        public ClienteDTO getClienteDto(Long id){
-//
-//            ClienteDTO clienteDto = new ClienteDTO();
-//
-//            Cliente clienteObtener = clienteRepo.getReferenceById(id);
-//
-//            clienteDto.setNombre(clienteObtener.getNombre());
-//
-//            clienteDto.setApellido(clienteObtener.getApellido());
-//
-//            clienteDto.setAños(clienteObtener.getFechanacimiento());
-//
-//            return clienteDto;
-//
-//        };
-//
-//
-//
-//
-//     return clienteRepo.save(clienteRepo.getReferenceById(id));
-//    }
+
+
+
+    public ClienteDTO getClienteDTO(Long id) {
+
+        ClienteDTO clienteDto = new ClienteDTO();
+
+        Cliente clienteObtener = clienteRepo.getReferenceById(id);
+        clienteDto.setNombre(clienteObtener.getNombre());
+        clienteDto.setApellido(clienteObtener.getApellido());
+        LocalDate fechanacimiento = clienteObtener.getFechanacimiento();
+        LocalDate hoy = LocalDate.now();
+        Period periodo = Period.between( fechanacimiento, hoy);
+        int años = periodo.getYears();
+        clienteDto.setAños(años);
+
+       return clienteDto;
+    }
+
 }
+

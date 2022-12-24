@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 @Entity
@@ -24,13 +25,16 @@ public class Cliente {
     private String apellido;
 
     @Column(name = "FECHANACIMIENTO")
-    private Date fechanacimiento;
+    private LocalDate fechanacimiento;
 
     public Cliente() {
     }
 
-    public Cliente(String nombre, long dni, String apellido, Date fechanacimiento) {
-
+    public Cliente(String nombre, long dni, String apellido, LocalDate fechanacimiento) {
+       this.nombre = nombre;
+       this.dni = dni;
+       this.apellido = apellido;
+       this.fechanacimiento = fechanacimiento;
     }
 
     public long getId() {
@@ -65,11 +69,11 @@ public class Cliente {
         this.apellido = apellido;
     }
 
-    public Date getFechanacimiento() {
+    public LocalDate getFechanacimiento() {
         return fechanacimiento;
     }
 
-    public void setFechanacimiento(Date fechanacimiento) {
+    public void setFechanacimiento(LocalDate fechanacimiento) {
         this.fechanacimiento = fechanacimiento;
     }
 
